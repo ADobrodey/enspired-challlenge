@@ -52,12 +52,12 @@ def main(argv):
     try:
         opts, args = getopt.getopt(argv, "hi:", ["help=", "rooms="])
     except getopt.GetoptError:
-        print ('plan_apartment.py -i <inputfile>')
+        print('plan_apartment.py -i <inputfile>')
         sys.exit(2)
 
     for opt, arg in opts:
         if opt == '-h':
-            print ('test.py -i <inputfile> -o <outputfile>')
+            print('test.py -i <inputfile> -o <outputfile>')
             sys.exit()
         elif opt in ("-i", "--rooms"):
             rooms_file = arg
