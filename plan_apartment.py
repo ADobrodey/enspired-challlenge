@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import sys, getopt
 
 HORIZONTAL_WALLS = ['+', '-']
 VERTICAL_WALLS = ['|', '/', '\\']
@@ -37,12 +38,35 @@ class Room:
 
     def __str__(self):
         return (
-                self.name +
-                ':\n' + f"W: {self.chairs['W']}, P: {self.chairs['P']}, S: {self.chairs['S']}, C: {self.chairs['C']}"
+            self.name +
+            ':\n' + f"W: {self.chairs['W']}, P: {self.chairs['P']}, S: {self.chairs['S']}, C: {self.chairs['C']}"
         )
 
     def __repr__(self):
         return self.name
+
+
+def main(argv):
+    rooms_file = 'rooms.txt'
+
+    try:
+        opts, args = getopt.getopt(argv, "hi:", ["help=", "rooms="])
+    except getopt.GetoptError:
+        print ('plan_apartment.py -i <inputfile>')
+        sys.exit(2)
+
+    for opt, arg in opts:
+        if opt == '-h':
+            print ('test.py -i <inputfile> -o <outputfile>')
+            sys.exit()
+        elif opt in ("-i", "--rooms"):
+            rooms_file = arg
+
+    with open(rooms_file) as f:
+        rooms_txt = f.read()
+
+    rooms = process_rooms(rooms_txt)
+    print_outputs(rooms)
 
 
 def find_room(rooms_list: set[Room], coords: tuple) -> Room:
@@ -112,7 +136,4 @@ def print_outputs(apartment_rooms: set[Room]) -> None:
 
 
 if __name__ == "__main__":
-    with open('rooms.txt') as f:
-        rooms_txt = f.read()
-    rooms = process_rooms(rooms_txt)
-    print_outputs(rooms)
+    main(sys.argv[1:])

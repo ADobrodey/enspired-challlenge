@@ -1,5 +1,12 @@
 # Technical Challenge for Enspired
 
+## Usage
+By default, the script will process local rooms.txt file. You can adjust this behavior by providing custom rooms plan.
+
+```shell
+plan_apartment.py -i rooms.txt
+```
+
 ## Task description
 ```text
 Apartment And Chair Delivery Limited has a unique position on the housing market. The company not only builds apartments, but also equips them with chairs.
